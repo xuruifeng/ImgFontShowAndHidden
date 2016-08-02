@@ -1,0 +1,3 @@
+1.z-index:2;   同级元素，如果被遮盖，可以用这个调整谁遮盖谁。
+
+2.border-sizing  只能用于ie8包括ie8以上。	因为使用了css为元素  before after

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>盒子内边框鼠标移入逐渐变长成为box</title>
+</head>
+
+<body>
+	<style type="text/css">
+		/*最外面包裹图片的块元素*/
+		.outdiv{
+			position:relative;	/*这个必须要有，里面的元素都是根据这个relative设定absolute的位置的*/
+			width:200px;
+			height:200px;
+			border:1px solid #222;
+			background-color:blue;
+			overflow:hidden;	/*这个块元素里面一般放置的都是图片，因此必须加上超出隐藏*/
+		}
+		.description_font{
+			position:absolute;
+			top:10%;
+			left:10%;
+			width:80%;
+			height:80%;
+			box-sizing:border-box;				/*目的是为了居中显示*/
+			border:2px solid transparent;		/*因为div width:100%;会继承padding 但是不会继承border，因此通过border让出一部分的边框的距离*/
+
+		}
+		.description_font_content{
+			width:100%;
+			height:100%;
+			font-family: monospace, monospace, serif;	/*字数多的时候有衬线的字体看着比较好*/
+			text-align:justify;
+			background-color:#0CF;
+			overflow:hidden;
+			opacity:0;
+			filter:Alpha(opacity=0);
+			transition:all 1s;											
+		}
+		
+		.outdiv:after{
+			content:"";			
+			position:absolute;
+			display:block;
+			box-sizing:border-box;					/*加这个属性的目的是为了居中*/
+			top:10%;
+			left:10%;
+			height:80%;
+			width:80%;
+			border-top:2px solid #B6D82D;
+			border-bottom:2px solid #B6D82D;
+			background-color:transparent;
+			z-index:2;								/*防止被遮盖*/
+			transition:all 1s;
+			transform:scaleX(0);
+		}
+		
+		.outdiv::after{
+			content:"";			
+			position:absolute;
+			display:block;
+			box-sizing:border-box;					/*加这个属性的目的是为了居中*/
+			top:10%;
+			left:10%;
+			height:80%;
+			width:80%;
+			border-top:2px solid #B6D82D;
+			border-bottom:2px solid #B6D82D;
+			background-color:transparent;
+			z-index:2;								/*防止被遮盖*/
+			transition:all 1s;
+			transform:scaleX(0);
+		}
+		
+		
+		.outdiv:before{
+			content:"";			
+			position:absolute;
+			display:block;
+			box-sizing:border-box;					/*加这个属性的目的是为了居中*/
+			top:10%;
+			left:10%;
+			height:80%;
+			width:80%;
+			border-left:2px solid #B6D82D;
+			border-right:2px solid #B6D82D;
+			background-color:transparent;
+			z-index:2;								/*防止被遮盖*/
+			transition:all 1s;
+			transform:scaleY(0);
+		}
+		.outdiv::before{
+			content:"";			
+			position:absolute;
+			display:block;
+			box-sizing:border-box;					/*加这个属性的目的是为了居中*/
+			top:10%;
+			left:10%;
+			height:80%;
+			width:80%;
+			border-left:2px solid #B6D82D;
+			border-right:2px solid #B6D82D;
+			background-color:transparent;
+			z-index:2;								/*防止被遮盖*/
+			transition:all 1s;
+			transform:scaleY(0);
+		}
+		
+		.outdiv:hover:after{transform:scaleX(1);}		/*展示和隐藏*/
+		.outdiv:hover::after{transform:scaleX(1);}		/*展示和隐藏   :: 为了支持兼容*/
+		.outdiv:hover:before{transform:scaleY(1);}		/*展示和隐藏*/
+		.outdiv:hover::before{transform:scaleY(1);}		/*展示和隐藏   :: 为了支持兼容*/
+		.outdiv:hover .description_font_content{opacity:.8;filter:Alpha(opacity=80);}	/*通过透明度控制显示和隐藏*/
+    </style>
+
+
+
+	<div class="outdiv">
+    	<img src="picture.jpg" alt="" title="" />
+    	<div class="description_font">        	
+            <div class="description_font_content">
+            	道德经，道可道，名可名，无名天地之始，有名万物之母，固恒无欲，以观其妙，
+                恒有欲以观其傲，此二者同处而异名，同谓之玄，玄之又玄，众妙之门。
+            </div>	        	
+        </div>	
+    </div>
+</body>
+</html>
